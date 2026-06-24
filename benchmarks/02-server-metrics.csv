@@ -1,0 +1,7 @@
+llamacpp:kv_cache_tokens,llamacpp:kv_cache_usage_ratio,llamacpp:n_busy_slots_per_decode,llamacpp:n_decode_total,llamacpp:prompt_tokens_total,llamacpp:requests_deferred,llamacpp:requests_processing,llamacpp:tokens_predicted_total,t
+356.0,0.173828,1.0,1196.0,7765.0,107.0,1.0,1196.0,1782269167.2
+356.0,0.173828,1.0,1196.0,7765.0,107.0,1.0,1196.0,1782269169.3
+356.0,0.173828,1.0,1196.0,7765.0,107.0,1.0,1196.0,1782269171.3
+356.0,0.173828,1.0,1216.0,8095.0,107.0,1.0,1216.0,1782269173.3
+356.0,0.173828,1.0,1228.0,8120.0,107.0,1.0,1228.0,1782269175.3
+356.0,0.173828,1.0,1252.0,8171.0,107.0,1.0,1252.0,1782269177.4

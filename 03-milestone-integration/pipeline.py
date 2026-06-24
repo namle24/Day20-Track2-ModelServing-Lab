@@ -8,12 +8,14 @@ in your real lakehouse + vector store.
 from __future__ import annotations
 
 import time
+import os
 from dataclasses import dataclass
 from typing import Iterable
 
 import httpx
 
 LLAMA_SERVER_BASE = "http://localhost:8080/v1"
+PIPELINE_MAX_TOKENS = int(os.environ.get("LAB_PIPELINE_MAX_TOKENS", "64"))
 SYSTEM_PROMPT = (
     "You are a serving-engineering tutor. Answer using only the documents provided. "
     "If the documents don't contain the answer, say so."
@@ -74,7 +76,7 @@ def call_llm(messages: list[dict]) -> tuple[str, float]:
     t0 = time.perf_counter()
     r = httpx.post(
         f"{LLAMA_SERVER_BASE}/chat/completions",
-        json={"model": "local", "messages": messages, "max_tokens": 200, "temperature": 0.3},
+        json={"model": "local", "messages": messages, "max_tokens": PIPELINE_MAX_TOKENS, "temperature": 0.3},
         timeout=120.0,
     )
     r.raise_for_status()

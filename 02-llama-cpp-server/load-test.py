@@ -7,6 +7,7 @@ Run with:
 """
 from __future__ import annotations
 
+import os
 import random
 
 from locust import HttpUser, between, task
@@ -43,6 +44,9 @@ LONG_PROMPTS = [
     "Given the doc above, explain APC to a backend engineer who knows caches.",
 ]
 
+SHORT_MAX_TOKENS = int(os.environ.get("LAB_LOAD_SHORT_MAX_TOKENS", "24"))
+LONG_MAX_TOKENS = int(os.environ.get("LAB_LOAD_LONG_MAX_TOKENS", "40"))
+
 
 class LlamaServerUser(HttpUser):
     wait_time = between(0.2, 1.5)
@@ -50,7 +54,7 @@ class LlamaServerUser(HttpUser):
     @task(4)
     def short_prompt(self):
         msg = random.choice(SHORT_PROMPTS)
-        self._chat([{"role": "user", "content": msg}], max_tokens=80, name="short")
+        self._chat([{"role": "user", "content": msg}], max_tokens=SHORT_MAX_TOKENS, name="short")
 
     @task(1)
     def long_prompt_rag(self):
@@ -59,7 +63,7 @@ class LlamaServerUser(HttpUser):
             {"role": "system", "content": "You answer using the document provided."},
             {"role": "user", "content": LONG_CONTEXT + "\n\nQuestion: " + msg},
         ]
-        self._chat(messages, max_tokens=160, name="long-rag")
+        self._chat(messages, max_tokens=LONG_MAX_TOKENS, name="long-rag")
 
     def _chat(self, messages, max_tokens: int, name: str) -> None:
         self.client.post(

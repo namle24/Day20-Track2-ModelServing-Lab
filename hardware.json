@@ -1,0 +1,37 @@
+{
+  "cpu": {
+    "arch": "x86_64",
+    "cores_logical": 8,
+    "model": "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz",
+    "avx2": true,
+    "avx512": false,
+    "neon": false,
+    "cores_physical": 8
+  },
+  "ram_gb": 7.6,
+  "gpu": {
+    "backends": {
+      "nvidia_cuda": false,
+      "amd_rocm": false,
+      "apple_metal": false,
+      "vulkan": false,
+      "cpu_only": true
+    },
+    "details": {}
+  },
+  "docker": {
+    "docker": true,
+    "compose": true
+  },
+  "recommendation": {
+    "recommended_paths": [
+      "01-llama-cpp-quickstart",
+      "02-llama-cpp-server",
+      "03-milestone-integration",
+      "BONUS-llama-cpp-optimization"
+    ],
+    "recommended_model": "TinyLlama-1.1B (Q4_K_M)",
+    "llama_cpp_backend": "CPU (AVX/NEON tuning)",
+    "llama_cpp_cmake_flag": ""
+  }
+}
